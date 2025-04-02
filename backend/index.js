@@ -13,7 +13,7 @@ const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authRoutes");
 const surveyRoutes = require("./routes/surveyRoutes");
 
-const MONGO_URL = process.env.MONGODB_ATLAS_URL
+const MONGO_URL = process.env.MONGODB_ATLAS_URL;
 main()
   .then(() => {
     console.log("Connected to Database");
@@ -31,7 +31,7 @@ const app = express();
 // 🔹 CORS Middleware (Allow frontend requests)
 app.use(
   cors({
-    origin: "http://localhost:5173", // Change this to your Vite frontend URL
+    origin: process.env.FRONTEND_URL, // Change this to your Vite frontend URL
     credentials: true, // Allow cookies to be sent with requests
   })
 );
