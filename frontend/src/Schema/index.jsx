@@ -23,31 +23,36 @@ export const formSchema = Yup.object().shape({
   products: Yup.array()
     .of(
       Yup.object().shape({
-        productName: Yup.string().when(["brand", "quantity", "price"], {
-          is: (brand, quantity, price) => brand || quantity || price, // Validate only if one of them is filled
-          then: (schema) => schema.required("Select a product"),
-        }),
-        brand: Yup.string().when(["productName", "quantity", "price"], {
-          is: (productName, quantity, price) =>
-            productName || quantity || price,
-          then: (schema) => schema.required("Enter brand name"),
+        productName: Yup.string().required("Product name is required"), // Make it always required
+        brand: Yup.string().when("productName", {
+          is: (productName) => !!productName,
+          then: (schema) => schema.required("Brand name is required"),
         }),
         quantity: Yup.number()
           .nullable()
-          .when(["productName", "brand", "price"], {
-            is: (productName, brand, price) => productName || brand || price,
+          .transform((value, originalValue) =>
+            originalValue === "" ? null : value
+          )
+          .when("productName", {
+            is: (productName) => !!productName,
             then: (schema) =>
-              schema.min(1, "You should add Quantity!!").required("Required"),
+              schema
+                .min(1, "Quantity must be at least 1")
+                .required("Quantity is required"),
           }),
         price: Yup.number()
           .nullable()
-          .when(["productName", "brand", "quantity"], {
-            is: (productName, brand, quantity) =>
-              productName || brand || quantity,
+          .transform((value, originalValue) =>
+            originalValue === "" ? null : value
+          )
+          .when("productName", {
+            is: (productName) => !!productName,
             then: (schema) =>
-              schema.min(1, "You should add Price!!").required("Required"),
+              schema
+                .min(1, "Price must be at least 1")
+                .required("Price is required"),
           }),
       })
     )
-    .min(1, "At least one product required"),
+    .min(1, "At least one product is required"),
 });
