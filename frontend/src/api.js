@@ -3,7 +3,7 @@ if (process.env.NODE_ENV != "production") {
 }
 import axios from "axios";
 
-const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/api`
 
 const AUTH_URL = `${BASE_URL}/auth`;
 const SURVEY_URL = `${BASE_URL}/surveys`;
@@ -33,7 +33,6 @@ export const signupUser = async (name, email, password) => {
         withCredentials: true,
       }
     );
-    console.log("Signup API Response:", response.data);
     return { success: true, message: response.data.message };
   } catch (error) {
     return {
