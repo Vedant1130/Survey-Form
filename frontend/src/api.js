@@ -1,7 +1,12 @@
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
 import axios from "axios";
 
-const AUTH_URL = "http://localhost:5000/api/auth";
-const SURVEY_URL = "http://localhost:5000/api/surveys";
+const BASE_URL = `${process.env.REACT_APP_BACKEND_URL}/api`;
+
+const AUTH_URL = `${BASE_URL}/auth`;
+const SURVEY_URL = `${BASE_URL}/surveys`;
 
 const LOGIN = `${AUTH_URL}/login`;
 const LOGOUT = `${AUTH_URL}/logout`;
