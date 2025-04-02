@@ -8,7 +8,7 @@ import Form from "./Components/Survey Form/Form";
 import { AuthProvider, useAuth } from "./context/useAuth"; // Import AuthProvider
 import ProtectedRoute from "./private_route";
 import ToastNotification from "./Components/ToastNotification/ToastNotification";
-import ViewForm from "./Components/Survey Form/viewForm";
+import ViewForm from "./Components/Survey Form/ViewForm";
 import ComparisonTable from "./Components/Survey Form/ComparisonTable";
 
 function App() {
