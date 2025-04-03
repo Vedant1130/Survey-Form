@@ -45,7 +45,7 @@ export const signupUser = async (name, email, password) => {
 export const loginUser = async (name, password) => {
   try {
     const response = await axios.post(
-      `${LOGIN}`,
+      LOGIN,
       { name, password },
       { withCredentials: true } // ✅ Ensures cookies are sent/received
     );
